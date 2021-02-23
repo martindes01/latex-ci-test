@@ -3,7 +3,7 @@ name: LaTeX release
 on:
   push:
     branches:
-      - main
+      - bain
     tags:
       - 'v*.*.*'
 
