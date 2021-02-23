@@ -2,8 +2,8 @@ name: LaTeX CI
 
 on:
   push:
-    # tags-ignore:
-    #   - 'v*.*.*'
+    tags-ignore:
+      - 'v*.*.*'
     # paths:
     #   - '**.tex'
 
@@ -18,7 +18,7 @@ jobs:
       - name: Compile LaTeX source to PDF
         uses: xu-cheng/latex-action@v2
         with:
-          root-file: data-structures-algorithms-databases.tex
+          root_file: data-structures-algorithms-databases.tex
 
       - name: Upload compiled PDF as artifact
         uses: actions/upload-artifact@v2
