@@ -20,7 +20,7 @@ jobs:
       - name: Compile LaTeX source to PDF
         uses: xu-cheng/latex-action@v2
         with:
-          root-file: data-structures-algorithms-databases.tex
+          root_file: data-structures-algorithms-databases.tex
 
       - name: Determine whether the tag marks a pre-release
         id: prerelease
