@@ -1,0 +1,54 @@
+name: LaTeX release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+    paths:
+      - '**.tex'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Compile LaTeX source to PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root-file: data-structures-algorithms-databases.tex
+
+      - name: Determine whether the tag marks a pre-release
+        id: prerelease
+        run: |
+          if [[ ! ${GITHUB_REF#refs/tags/} =~ ^v0*[1-9][0-9]*\.[0-9]+\.[0-9]+$ ]]
+          then
+            PRERELEASE=true
+          else
+            PRERELEASE=false
+          fi
+          echo ::set-output name=prerelease::$PRERELEASE
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          prerelease: ${{ steps.prerelease.outputs.prerelease }}
+
+      - name: Upload compiled PDF as release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_name: data-structures-algorithms-databases.pdf
+          asset_path: data-structures-algorithms-databases.pdf
+          asset_content_type: application/pdf
