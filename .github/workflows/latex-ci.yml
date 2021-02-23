@@ -2,8 +2,8 @@ name: LaTeX CI
 
 on:
   push:
-    tags-ignore:
-      - 'v*.*.*'
+    # tags-ignore:
+    #   - 'v*.*.*'
     # paths:
     #   - '**.tex'
 
