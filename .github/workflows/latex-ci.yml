@@ -3,7 +3,11 @@ name: LaTeX CI
 on:
   push:
     branches-ignore:
-      - main
+      - bain
+    tags:
+      - '**'
+    paths:
+      - '**.tex'
 
 jobs:
   build:
