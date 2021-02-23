@@ -6,8 +6,8 @@ on:
       - main
     tags:
       - 'v*.*.*'
-    paths:
-      - '**.tex'
+    # paths:
+    #   - '**.tex'
 
 jobs:
   release:
