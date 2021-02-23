@@ -4,8 +4,8 @@ on:
   push:
     branches-ignore:
       - bain
-    tags-ignore:
-      - '**'
+    # tags-ignore:
+    #   - '**'
     paths:
       - '**.tex'
 
