@@ -3,9 +3,9 @@ name: LaTeX CI
 on:
   push:
     branches-ignore:
-      - 'main'
-    tags-ignore:
-      - 'v*.*.*'
+      - main
+    tags:
+      - '**'
     paths:
       - '**.tex'
 
