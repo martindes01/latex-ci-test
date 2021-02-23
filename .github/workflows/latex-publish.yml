@@ -2,8 +2,6 @@ name: LaTeX release
 
 on:
   push:
-    # branches:
-    #   - bain
     tags:
       - 'v*.*.*'
 
