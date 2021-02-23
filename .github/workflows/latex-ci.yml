@@ -4,10 +4,8 @@ on:
   push:
     branches-ignore:
       - main
-    tags-ignore:
-      - 'v.*.*.*'
-    paths:
-      - '**.tex'
+    tags:
+      - '**'
 
 jobs:
   build:
