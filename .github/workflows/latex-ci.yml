@@ -2,8 +2,8 @@ name: LaTeX CI
 
 on:
   push:
-    branches:
-      - '!main'
+    branches-ignore:
+      - main
     tags:
       - '**'
     paths:
