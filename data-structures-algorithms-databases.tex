@@ -1,0 +1,55 @@
+\documentclass[
+  11pt,
+  a4paper,
+  % titlepage,
+]{article}
+
+\title{Data Structures, Algorithms and Databases}
+\author{Martin de Spirlet}
+\date{}
+
+% Set document geometry
+\usepackage[
+  a4paper,
+  margin = 1in,
+  % showframe,
+]{geometry} % Flexible and complete interface to document dimensions
+
+% Set default font family to default sans-serif font
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{booktabs}
+\usepackage[skip=\glueexpr\baselineskip\relax]{parskip} % Layout with zero \parindent non-zero \parskip
+\usepackage[onehalfspacing]{setspace} % Set space between lines % setspace must be loaded before hyperref
+\usepackage{sfmath} % Sans-serif mathematics
+
+% Increase penalty for widows and orphans (maximum 10000)
+\widowpenalty = 10000
+\clubpenalty = 10000
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\maketitle
+
+\vspace*{\fill}
+
+\begin{table}[htp]
+  \centering
+  \begin{tabular}{rrl}
+    \toprule
+    Week & Unit & Title \\
+    \midrule
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\vspace*{\fill}
+\addvspace{1in}
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\end{document}
