@@ -21,6 +21,9 @@ jobs:
       - name: Get ref information
         id: get_ref_information
         run: |
+          # Fetch all tags (workaround for https://github.com/actions/checkout/issues/290)
+          # actions/checkout@v2 currently disables automatic tag following with 'git fetch --no-tags'
+          git fetch --force --tags
           echo ::set-output name=stripped_name::$(git for-each-ref --count=1 --format='%(refname:lstrip=2)' $GITHUB_REF)
           echo ::set-output name=subject::$(git for-each-ref --count=1 --format='%(contents:subject)' $GITHUB_REF)
 
