@@ -18,16 +18,17 @@ jobs:
         with:
           root_file: data-structures-algorithms-databases.tex
 
-      - name: Determine whether the tag marks a pre-release
-        id: prerelease
+      - name: Get ref information
+        id: get_ref_information
         run: |
-          if [[ ! ${GITHUB_REF#refs/tags/} =~ ^v0*[1-9][0-9]*\.[0-9]+\.[0-9]+$ ]]
-          then
-            PRERELEASE=true
-          else
-            PRERELEASE=false
-          fi
-          echo ::set-output name=prerelease::$PRERELEASE
+          echo ::set-output name=stripped_name::$(git for-each-ref --count=1 --format='%(refname:lstrip=2)' $GITHUB_REF)
+          echo ::set-output name=subject::$(git for-each-ref --count=1 --format='%(contents:subject)' $GITHUB_REF)
+
+      - name: Determine whether this is a pre-release
+        id: determine_prerelease
+        run: |
+          stripped_name=${{ steps.get_ref_information.outputs.stripped_name }}
+          echo ::set-output name=prerelease::$( [[ ! $stripped_name =~ ^v?0*[1-9][0-9]*\.[0-9]+\.[0-9]+$ ]] && echo true || echo false )
 
       - name: Create release
         id: create_release
@@ -35,9 +36,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          prerelease: ${{ steps.prerelease.outputs.prerelease }}
+          tag_name: ${{ steps.get_ref_information.outputs.stripped_name }}
+          release_name: ${{ steps.get_ref_information.outputs.subject }}
+          prerelease: ${{ steps.determine_prerelease.outputs.prerelease }}
 
       - name: Upload compiled PDF as release asset
         uses: actions/upload-release-asset@v1
